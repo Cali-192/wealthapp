@@ -1,0 +1,16 @@
+{
+  "name": "Wealth Manager Pro",
+  "short_name": "WealthManager",
+  "start_url": "index.html",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#0d6efd",
+  "icons": [
+    {
+      "src": "https://cdn-icons-png.flaticon.com/512/2488/2488749.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
