@@ -21,15 +21,35 @@ body {
     margin: 0;
     display: flex;
     flex-direction: column;
-    min-vh: 100vh;
+    min-height: 100vh; /* Rregulluar nga min-vh në min-height */
+}
+
+/* --- FIX PER KLIKIMET --- */
+#auth-section, #main-app {
+    flex: 1 0 auto;
+    position: relative;
+    z-index: 10; /* Siguron që butonat të jenë mbi çdo overlay */
+    pointer-events: auto; /* Siguron që elementet të pranojnë klikime */
 }
 
 /* Animacione dhe Efekte */
 .logo-animation { 
     transition: transform 0.3s ease; 
+    filter: drop-shadow(0 0 5px rgba(0,0,0,0.1));
+    max-width: 60px;
+    height: auto;
+    display: inline-block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
 }
+
 .logo-animation:hover { 
     transform: scale(1.1) rotate(5deg); 
+}
+
+/* Fix për Dark Mode - sigurohemi që logoja të shihet */
+body.dark-mode .logo-animation {
+    filter: drop-shadow(0 0 8px rgba(255,255,255,0.2)) brightness(1.1);
 }
 
 .dark-text-fix, 
@@ -103,6 +123,9 @@ body.dark-mode .text-muted, body.dark-mode label, body.dark-mode p {
 .footer {
     padding: 2rem 0;
     margin-top: auto;
+    flex-shrink: 0;
+    position: relative;
+    z-index: 1; /* Më i ulët se seksionet e mësipërme */
 }
 
 .author-link {
@@ -129,62 +152,31 @@ body.dark-mode .text-muted, body.dark-mode label, body.dark-mode p {
     opacity: 0.8;
 }
 
-/* --- RESPONSIVE DESIGN (Përshtatja për çdo pajisje) --- */
+/* --- RESPONSIVE DESIGN --- */
 
-/* Për tableta dhe celularë */
 @media (max-width: 768px) {
     .container {
         padding-left: 15px;
         padding-right: 15px;
     }
     
-    h2 {
-        font-size: 1.5rem;
-    }
+    h2 { font-size: 1.5rem; }
+    .display-6 { font-size: 1.8rem; }
+    .auth-card { margin: 10px; padding: 1.5rem; }
+    .stat-card h6 { font-size: 0.9rem; }
 
-    .display-6 {
-        font-size: 1.8rem;
-    }
-
-    .auth-card {
-        margin: 10px;
-        padding: 1.5rem;
-    }
-
-    .stat-card h6 {
-        font-size: 0.9rem;
-    }
-
-    /* Bën që butonat e historisë të mos ngjishen */
     .d-flex.justify-content-between.align-items-center {
         flex-wrap: wrap;
         gap: 10px;
     }
 }
 
-/* Për celularë shumë të vegjël (iPhone SE etj) */
 @media (max-width: 480px) {
-    .profile-pic-container {
-        width: 35px;
-        height: 35px;
-    }
-
-    #user-display {
-        font-size: 0.9rem;
-    }
-
-    .btn {
-        padding: 8px 12px;
-        font-size: 0.9rem;
-    }
-
-    .list-group-item div span {
-        font-size: 0.95rem;
-    }
-
-    .footer p {
-        font-size: 0.85rem;
-    }
+    .profile-pic-container { width: 35px; height: 35px; }
+    #user-display { font-size: 0.9rem; }
+    .btn { padding: 8px 12px; font-size: 0.9rem; }
+    .list-group-item div span { font-size: 0.95rem; }
+    .footer p { font-size: 0.85rem; }
 }
 
 /* Dark Mode fixes */
@@ -203,4 +195,11 @@ body.dark-mode .text-muted, body.dark-mode label, body.dark-mode p {
 
 .dark-mode .dropdown-item:hover {
     background-color: #333;
+}
+
+/* Kjo parandalon që logoja të "zhduket" */
+#main-app img, #auth-section img {
+    display: inline-block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
 }
